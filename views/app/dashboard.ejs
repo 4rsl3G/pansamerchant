@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><%= APP_NAME %> • Dashboard</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="stylesheet" href="/public/css/app.css">
+</head>
+<body class="app">
+
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="pill"><i class="ri-store-2-line"></i> <span><%= merchantName %></span></div>
+      <div class="subpill">ID: <%= merchantId %></div>
+    </div>
+
+    <form method="POST" action="/logout">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <button class="iconbtn" title="Logout" type="submit"><i class="ri-logout-box-r-line"></i></button>
+    </form>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-card">
+        <div class="hero-title">Mutasi Hari Ini</div>
+        <div class="hero-sub"><i class="ri-calendar-line"></i> <%= dateYmd %></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-head">
+        <div class="card-title">Transaksi Masuk</div>
+        <div class="card-sub"><%= (tx || []).length %> data</div>
+      </div>
+
+      <div class="list">
+        <% if (!tx || tx.length === 0) { %>
+          <div class="empty">
+            <i class="ri-inbox-2-line"></i>
+            <div class="empty-title">Belum ada transaksi</div>
+            <div class="empty-sub">Coba refresh beberapa saat lagi.</div>
+          </div>
+        <% } %>
+
+        <% (tx || []).forEach(function(t) { %>
+          <div class="row">
+            <div class="row-icon">
+              <i class="ri-arrow-down-circle-line"></i>
+            </div>
+            <div class="row-main">
+              <div class="row-title">
+                Rp <%= (t.amount || 0).toLocaleString("id-ID") %>
+              </div>
+              <div class="row-sub">
+                <span class="badge"><%= t.status || "unknown" %></span>
+                <span class="dot">•</span>
+                <span><%= t.paymentType || "-" %></span>
+              </div>
+            </div>
+            <div class="row-right">
+              <div class="row-time"><%= (t.time || "").toString().slice(11,16) || "-" %></div>
+              <div class="row-id"><%= (t.id || "").toString().slice(0,10) %></div>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    </section>
+  </main>
+
+  <nav class="bottomnav">
+    <a class="bn active" href="/app"><i class="ri-home-5-line"></i><span>Home</span></a>
+    <a class="bn" href="/app"><i class="ri-file-list-3-line"></i><span>Mutasi</span></a>
+    <a class="bn" href="/app"><i class="ri-settings-3-line"></i><span>Set</span></a>
+  </nav>
+
+</body>
+</html>
