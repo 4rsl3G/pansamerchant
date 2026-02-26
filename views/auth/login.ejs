@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><%= APP_NAME %> • Login</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="stylesheet" href="/public/css/app.css">
+</head>
+<body class="auth">
+  <main class="auth-wrap">
+    <section class="card auth-card">
+      <div class="brand">
+        <div class="logo">
+          <i class="ri-wallet-3-line"></i>
+        </div>
+        <div class="brand-text">
+          <div class="brand-name"><%= APP_NAME %></div>
+          <div class="brand-sub">Merchant wallet dashboard</div>
+        </div>
+      </div>
+
+      <h1 class="title">Masuk</h1>
+      <p class="muted">Masukkan nomor HP merchant untuk kirim OTP.</p>
+
+      <% if (err) { %>
+        <div class="alert"><i class="ri-error-warning-line"></i><span><%= err %></span></div>
+      <% } %>
+
+      <form method="POST" action="/login" class="form">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <label class="field">
+          <span>Nomor HP</span>
+          <div class="input">
+            <i class="ri-smartphone-line"></i>
+            <input name="phone" inputmode="tel" placeholder="contoh: 0812xxxx" required />
+          </div>
+        </label>
+
+        <button class="btn primary" type="submit">
+          <i class="ri-message-3-line"></i> Kirim OTP
+        </button>
+      </form>
+
+      <div class="footnote">
+        <i class="ri-shield-check-line"></i>
+        Session disimpan aman via cookie HttpOnly terenkripsi.
+      </div>
+    </section>
+  </main>
+</body>
+</html>
