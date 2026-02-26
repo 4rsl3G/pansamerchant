@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><%= APP_NAME %> • Verifikasi</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="stylesheet" href="/public/css/app.css">
+</head>
+<body class="auth">
+  <main class="auth-wrap">
+    <section class="card auth-card">
+      <div class="brand mini">
+        <div class="logo"><i class="ri-shield-keyhole-line"></i></div>
+        <div class="brand-text">
+          <div class="brand-name">Verifikasi OTP</div>
+          <div class="brand-sub">Masukkan OTP yang kamu terima</div>
+        </div>
+      </div>
+
+      <% if (err) { %>
+        <div class="alert"><i class="ri-error-warning-line"></i><span><%= err %></span></div>
+      <% } %>
+
+      <form method="POST" action="/verify" class="form">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+        <label class="field">
+          <span>Nomor HP</span>
+          <div class="input">
+            <i class="ri-smartphone-line"></i>
+            <input name="phone" inputmode="tel" placeholder="nomor yang sama saat login" required />
+          </div>
+        </label>
+
+        <label class="field">
+          <span>OTP</span>
+          <div class="input">
+            <i class="ri-key-2-line"></i>
+            <input name="otp" inputmode="numeric" placeholder="6 digit" required />
+          </div>
+        </label>
+
+        <button class="btn primary" type="submit">
+          <i class="ri-login-circle-line"></i> Masuk Dashboard
+        </button>
+      </form>
+
+      <a class="link" href="/login"><i class="ri-arrow-left-line"></i> Ulangi login</a>
+    </section>
+  </main>
+</body>
+</html>
