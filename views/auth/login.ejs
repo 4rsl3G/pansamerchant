@@ -15,9 +15,7 @@
   <main class="auth-wrap">
     <section class="card auth-card">
       <div class="brand">
-        <div class="logo">
-          <i class="ri-wallet-3-line"></i>
-        </div>
+        <div class="logo"><i class="ri-wallet-3-line"></i></div>
         <div class="brand-text">
           <div class="brand-name"><%= APP_NAME %></div>
           <div class="brand-sub">Merchant wallet dashboard</div>
@@ -25,30 +23,39 @@
       </div>
 
       <h1 class="title">Masuk</h1>
-      <p class="muted">Masukkan nomor HP merchant untuk kirim OTP.</p>
+      <p class="muted">Login pakai email & password merchant.</p>
 
       <% if (err) { %>
         <div class="alert"><i class="ri-error-warning-line"></i><span><%= err %></span></div>
       <% } %>
 
-      <form method="POST" action="/login" class="form">
+      <form method="POST" action="/login" class="form" autocomplete="on">
         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
         <label class="field">
-          <span>Nomor HP</span>
+          <span>Email</span>
           <div class="input">
-            <i class="ri-smartphone-line"></i>
-            <input name="phone" inputmode="tel" placeholder="contoh: 0812xxxx" required />
+            <i class="ri-mail-line"></i>
+            <input name="email" type="email" placeholder="email@domain.com" required />
+          </div>
+        </label>
+
+        <label class="field">
+          <span>Password</span>
+          <div class="input">
+            <i class="ri-lock-2-line"></i>
+            <input name="password" type="password" placeholder="••••••••" required />
           </div>
         </label>
 
         <button class="btn primary" type="submit">
-          <i class="ri-message-3-line"></i> Kirim OTP
+          <i class="ri-login-circle-line"></i> Masuk Dashboard
         </button>
       </form>
 
       <div class="footnote">
         <i class="ri-shield-check-line"></i>
-        Session disimpan aman via cookie HttpOnly terenkripsi.
+        Password tidak disimpan. Session aman via cookie HttpOnly terenkripsi.
       </div>
     </section>
   </main>
