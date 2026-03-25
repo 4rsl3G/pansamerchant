@@ -24,7 +24,7 @@ function baseHeaders(acc) {
     "Gojek-Country-Code": "ID",
     "Gojek-Timezone": "Asia/Jakarta",
     "X-Appid": "go-biz-web-dashboard",
-    "X-Appversion": "platform-v3.97.0-b986b897",
+    "X-Appversion": "platform-v3.100.0-065b170a",
     "X-Deviceos": "Web",
     "X-Phonemake": "Windows 10 64-bit",
     "X-Phonemodel": "Chrome 143.0.0.0 on Windows 10 64-bit",
